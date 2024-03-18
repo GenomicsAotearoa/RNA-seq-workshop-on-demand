@@ -125,6 +125,7 @@ hisat2 -p 4 -x ../Genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel -U $filen
 done
 ```
 
+
 Now we can explore our SAM files.
 
 ```bash
