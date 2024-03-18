@@ -23,22 +23,19 @@ To be able to map (align) sequencing reads on the genome, the genome needs to be
 Note for speed reason, the reads will be aligned on the chr5 of the Yeast genome.
 
 ```bash
-cd /home/$USER/RNA_seq/Genome
+cd ~RNA_seq/Genome
 
 #to list what is in your directory:
-ls /home/$USER/RNA_seq/Genome
+ls
 ```
 ```
     Saccharomyces_cerevisiae.R64-1-1.99.gtf  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
 ```
 ```bash
-module load HISAT2/2.2.1-gimpi-2022a
-
 # index file:
 hisat2-build -p 4 -f Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
 
-#list what is in the directory:
-ls /home/$USER/RNA_seq/Genome
+ls 
 ```
 ```
 Saccharomyces_cerevisiae.R64-1-1.99.gtf              Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.4.ht2  Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.8.ht2
@@ -73,7 +70,7 @@ cd ..
  ls
 ```
 ```
-    Genome  QC  Raw  Trimmed
+    Genome  Intro   MultiQC QC  Raw  Trimmed
 ```
 
 Let's map one of our sample to the genome
@@ -83,10 +80,10 @@ hisat2 -x Genome/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel -U Raw/SRR014335-
 ```
 ```125090 reads; of these:
   125090 (100.00%) were unpaired; of these:
-    20537 (16.42%) aligned 0 times
-    85066 (68.00%) aligned exactly 1 time
-    19487 (15.58%) aligned >1 times
-83.58% overall alignment rate
+    15108 (12.08%) aligned 0 times
+    88991 (71.14%) aligned exactly 1 time
+    20991 (16.78%) aligned >1 times
+87.92% overall alignment rate
 ```
 !!! quote ""
 
@@ -101,7 +98,7 @@ Now we need to align all the rest of the samples.
 pwd
 ```
 ```
-    /home/$USER/RNA_seq/
+    /home/shared/TRAINING1/RNA_seq/
 ```
 ```bash
 mkdir Mapping
@@ -157,13 +154,13 @@ The file begins with a header, which is optional. The header is used to describe
 We will convert the SAM file to BAM format using the samtools program with the `view` command 
 
 ```bash
-module load SAMtools/1.15.1-GCC-11.3.0
-
 for filename in *.sam
 do
 base=$(basename ${filename} .sam)
 samtools view -S -b ${filename} -o ${base}.bam
 done
+
+# Note, when you run this you may get a notification output saying "fail to read the header from SRR014335-chr1.log.sam". Is this an issue? What is happening here? This is a good opportunity to think about what your code is doing and what files you have.
 ```
 !!! quote ""
  
@@ -202,11 +199,14 @@ You can use samtools to learn more about the bam file as well.
 samtools flagstat SRR014335-chr1_sorted.bam 
 ```
 ```
-156984 + 0 in total (QC-passed reads + QC-failed reads)
-31894 + 0 secondary
+161257 + 0 in total (QC-passed reads + QC-failed reads)
+125090 + 0 primary
+36167 + 0 secondary
 0 + 0 supplementary
 0 + 0 duplicates
-136447 + 0 mapped (86.92% : N/A)
+0 + 0 primary duplicates
+146368 + 0 mapped (90.77% : N/A)
+110201 + 0 primary mapped (88.10% : N/A)
 0 + 0 paired in sequencing
 0 + 0 read1
 0 + 0 read2
@@ -253,16 +253,13 @@ is a count table, in which the number of reads assigned to each feature in each 
 You can process all the samples at once:
 
 ```bash
-module load Subread/2.0.3-GCC-11.3.0
-pwd
+cd ~/RNA_seq
 ```
-```
-/home/$USER/RNA_seq
-```
+
 ```bash
 mkdir Counts
 cd Counts
-featureCounts -a ../Genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf -o ./yeast_counts.txt -T 2 -t exon -g gene_id ../Mapping/*sorted.bam
+featureCounts -a ../Genome/Saccharomyces_cerevisiae.R64-1-1.99.gtf -o ~/RNA_seq/Counts/yeast_counts.txt -T 2 -t exon -g gene_id ~/RNA_seq/Mapping/*sorted.bam
 ```
 !!! quote ""
     * **-a** Name of an annotation file. GTF/GFF format by default

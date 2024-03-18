@@ -35,14 +35,15 @@ from FASTQ files.
 - The following syntax will remove the adapter sequence AACCGGTT from the file SRR014335-chr1.fastq, create a new file called SRR014335-chr1_trimmed.fastq, and write a summary to the log file SRR014335-chr1.log:
 
 ```bash
+cd ~/RNA_seq
+
 pwd
 ```
 ```
-    /home/$USER/RNA_seq
+    /home/shared/TRAINING1/RNA_seq
 ```
 ```bash
 mkdir Trimmed
-module load cutadapt/4.1-gimkl-2022a-Python-3.10.5
 cutadapt -q 20 -a AACCGGTT -o Trimmed/SRR014335-chr1_cutadapt.fastq Raw/SRR014335-chr1.fastq > Trimmed/SRR014335-chr1.log
 ```
 !!! quote ""
