@@ -25,8 +25,8 @@ pwd
 ```
 
 ```
-    /home/$USER
-# good I am ready to work
+    /home/shared/TRAINING1
+# Instead of "TRAINING1" you should see the training username you used to log in. 
 ```
 
 Checking to make sure we have the Raw files for the workshop.
@@ -52,69 +52,13 @@ ls
 mkdir QC
 ```
 
-Since we are working on the NeSI HPC, we need to search and load the software/application before we can use it.
-
-??? info "Note: Accessing and Deploying software with `module` command""
-
-    * View available modules
-
-    ```bash
-    #View all modules
-    module avail
-
-    # View all modules which match the keyword in their name
-    module avail KEYWORD
-
-    # View all modules which match the keyword in their name or description
-    module spider KEYWORD
-    ```
-
-    * Load a specific program
-
-        >All module names on NeSI Software stack have a version and toolchain/environment suffixes. If none is specified, then the default version of the software is loaded. The default version can be seen with the `module avail modulename` command (corresponding module name will have `(D)` suffix)
-
-    ```bash
-    module load Module_Name
-    ```
-
-
-    * Unload all current modules
-
-    ```bash
-    module purge
-    ```
-    >Please **do not** use `$module --force purge`
-
-    * Swap a currently loaded module for a different one
-
-    ```bash
-    module switch CURRENT_MODULE DESIRED_MODULE
-    ```
-
-* Search whether the software is available as a module with `module spider` command. 
-
-```bash
-module spider fastqc
-```
-
-and then load 
-
-```bash
-module purge
-module load FastQC/0.11.9
-```
-
-!!! warning "Warning"
-    module name used for `module spider` is case insensitive.i.e. `fastqc` will respond and show the available modules matching the string. However, module name for `module load` command is case sensitive. Therefore, we recommend copying and pasting the name/version of it from the spider list
-    
-
-!!! hint "Load all modules at once"
-
-    There is a file named ***rsmodules.sh*** which is a shell script to load the required modules at once. Running <br>`source ~/RNA_seq/rsmodules.sh` command will execute it. 
+NOTE: If you are familiar with working on the NeSI HPC, you will be used to loading modules (software). With the OnDemand system we do not need to load modules. 
 
 
 
-Now we can start the quality control:
+
+
+We start with quality control:
 
 ```bash
 fastqc -o QC/ Raw/*
@@ -183,6 +127,7 @@ Use less to preview the summary.txt file
 
 ```
 less SRR014335-chr1_fastqc/summary.txt
+# Use "q" to exit (quit) out of the window when you are done.
 ```
 
 We can make a record of the results we obtained for all our samples by concatenating all of our summary.txt files into a single file using the cat command. We’ll call this fastqc_summaries.txt.
@@ -205,7 +150,6 @@ cat */summary.txt > ~/RNA_seq/QC/fastqc_summaries.txt
      - To generate `multiqc` results, run the following command in the directory with the output files you want to summarise (e.g., fastqc reports generated above):
     
 ```bash
-module load MultiQC/1.13-gimkl-2022a-Python-3.10.5
 cd ~/RNA_seq/
 mkdir MultiQC
 cd MultiQC
