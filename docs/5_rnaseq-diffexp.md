@@ -633,7 +633,7 @@ dds = DESeqDataSetFromMatrix(countData = as.matrix(counts),
                               design = formula(~conds))
 ```
 
-Can access the count data in teh `dds` object via the `counts()`
+Can access the count data in the `dds` object via the `counts()`
 function:
 
 ``` r
