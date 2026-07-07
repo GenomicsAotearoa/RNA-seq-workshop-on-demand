@@ -1,3 +1,6 @@
+# This workshop is now deprecated. 
+### See newer workshop material here: https://github.com/GenomicsAotearoa/RNA-seq-data-analysis-workflow
+
 # RNA-seq-workshop
 
 Refer to this page for workshop material https://genomicsaotearoa.github.io/RNA-seq-workshop/
