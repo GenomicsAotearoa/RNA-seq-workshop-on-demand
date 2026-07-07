@@ -2,7 +2,7 @@
 <h1><b>RNA-Seq Data Analysis</b></h1>
 
 
-<center>
+<center markdown="1">
 ![image](./theme_images/main_image.png){width="450"}
 </center>
 

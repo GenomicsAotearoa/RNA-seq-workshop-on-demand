@@ -5,7 +5,7 @@
     - Identify enriched biological functions or processes within a list of differentially expressed genes
     - Recognise the importance of gene length in over-representation analyses, and how to correct for this in your analysis
 
-<center>
+<center markdown="1">
 ![image](./theme_images/over-rep_theme.png){width="250"}
 </center>
 
@@ -450,7 +450,7 @@ library(gplots)
 venn(list(GO.wall=GO.wall.sig, GO.nobias=GO.nobias.sig))
 ```
 
-<center>![image](./rnaseq-pathway_files/figure-gfm/GO_venn.png)</center>
+<center markdown="1">![image](./rnaseq-pathway_files/figure-gfm/GO_venn.png)</center>
 
 
 

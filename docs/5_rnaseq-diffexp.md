@@ -6,7 +6,7 @@
     - Identify differentially expressed genes using LIMMA, DESeq2 and edgeR
     - Recognise the impact of different methods on differentially expressed gene sets
 
-<center>
+<center markdown="1">
 ![image](./theme_images/r_logos.png){width="420"}
 </center>
 

@@ -5,7 +5,7 @@
     - Align sequence reads to an indexed reference genome
     - Generate read counts for each exon in the genome
 
-<center>
+<center markdown="1">
 ![imge](./theme_images/mapping.png){width="300"}
 </center>
 

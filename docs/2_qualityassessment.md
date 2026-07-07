@@ -8,7 +8,7 @@
     - Use MultiQC to view our analysis results
 
 
-<center>
+<center markdown="1">
 ![image](./theme_images/qc_image.png){width="350"}
 </center>
 

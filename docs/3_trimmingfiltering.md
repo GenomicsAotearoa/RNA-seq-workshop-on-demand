@@ -5,7 +5,7 @@
     - Understand what adapters are
     - Understand that trimming can be done based on Phred scores or sequence
 
-<center>
+<center markdown="1">
 ![image](./theme_images/cleaning_reads.png){width="300"}
 </center>
 
